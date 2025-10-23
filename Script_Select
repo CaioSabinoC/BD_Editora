@@ -1,0 +1,124 @@
+USE Editora;
+
+-- 1
+SELECT nome, salario FROM Colaborador WHERE salario > 4000;
+
+-- 2
+SELECT ac.nome AS Area, COUNT(l.ISBN) AS Quantidade
+FROM AreaDeConhecimento ac
+LEFT JOIN Livro l ON ac.codArea = l.AreaDeConhecimento_codArea
+GROUP BY ac.nome;
+
+-- 3
+SELECT titulo, nPaginas FROM Livro WHERE nPaginas > 300;
+
+-- 4
+SELECT a.`idAutor(a)`, a.`Autor(a)col`, n.nacionalidade
+FROM `Autor(a)` a
+JOIN Nacionalidade n ON a.Nacionalidade_idPais = n.idPais
+WHERE n.nacionalidade = 'Brasileira';
+
+-- 5
+SELECT l.titulo, COUNT(e.nSerie) AS Exemplares
+FROM Livro l
+LEFT JOIN Exemplar e ON l.ISBN = e.Livro_ISBN
+GROUP BY l.titulo;
+
+-- 6
+SELECT Col.nome, COUNT(T.idTransacao) AS transacoesRealizadas
+FROM Colaborador Col
+LEFT JOIN Transacao T ON Col.CPF = T.Colaborador_CPF
+GROUP BY Col.nome;
+
+-- 7
+SELECT C.nome, COUNT(T.idTransacao) AS totalCompras, SUM(L.nPaginas) AS totalPaginas
+FROM Cliente C
+LEFT JOIN Transacao T ON C.CPF = T.Cliente_CPF
+LEFT JOIN Exemplar E ON T.Exemplar_nSerie = E.nSerie AND T.Exemplar_Livro_ISBN = E.Livro_ISBN
+LEFT JOIN Livro L ON E.Livro_ISBN = L.ISBN
+GROUP BY C.nome;
+
+
+-- 8
+SELECT L.titulo, COUNT(T.idTransacao) AS totalVendas
+FROM Livro L
+LEFT JOIN Exemplar E ON L.ISBN = E.Livro_ISBN
+LEFT JOIN Transacao T ON E.nSerie = T.Exemplar_nSerie AND E.Livro_ISBN = T.Exemplar_Livro_ISBN
+GROUP BY L.titulo;
+
+
+-- 9
+SELECT cg.nome, CONCAT("R$ ",FORMAT(AVG(cb.salario), 2, 'de_DE')) AS MediaSalarial
+FROM Cargo cg
+JOIN ContratoTrab ct ON cg.CBO = ct.Cargo_CBO
+JOIN Colaborador cb ON ct.Colaborador_CPF = cb.CPF
+GROUP BY cg.nome;
+
+-- 10
+SELECT d.nome AS Departamento, COUNT(ct.Colaborador_CPF) AS Qtde
+FROM Departamento d
+JOIN ContratoTrab ct ON d.idDepartamento = ct.Departamento_idDepartamento
+GROUP BY d.nome;
+
+-- 11
+SELECT a.`Autor(a)col`, COUNT(au.Livro_ISBN) AS QtdeLivros
+FROM `Autor(a)` a
+JOIN Autoria au ON a.`idAutor(a)` = au.`Autor(a)_idAutor(a)`
+GROUP BY a.`Autor(a)col`
+HAVING COUNT(au.Livro_ISBN) >= 2;
+
+-- 12
+SELECT l.titulo, e.status
+FROM Livro l
+JOIN Exemplar e ON l.ISBN = e.Livro_ISBN
+WHERE e.status != 'Disponível';
+
+-- 13
+SELECT titulo FROM Livro l
+JOIN AreaDeConhecimento a ON l.AreaDeConhecimento_codArea = a.codArea
+WHERE a.nome = 'Tecnologia';
+
+-- 14
+SELECT nome FROM Cliente
+WHERE CPF NOT IN (SELECT DISTINCT Cliente_CPF FROM Transacao);
+
+-- 15
+SELECT g.Colaborador_CPF, c.nome AS Gerente, d.nome AS Departamento
+FROM Gerente g
+JOIN Colaborador c ON g.Colaborador_CPF = c.CPF
+JOIN Departamento d ON g.Departamento_idDepartamento = d.idDepartamento;
+
+-- 16
+SELECT l.titulo, COUNT(r.PalavrasChave_codPalavra) AS Palavras
+FROM Livro l
+JOIN Refencia r ON l.ISBN = r.Livro_ISBN
+GROUP BY l.titulo
+ORDER BY Palavras DESC;
+
+-- 17
+SELECT l.titulo, COUNT(a.`Autor(a)_idAutor(a)`) AS QtdeAutores
+FROM Autoria a
+JOIN Livro l ON a.Livro_ISBN = l.ISBN
+GROUP BY l.titulo
+HAVING QtdeAutores > 1;
+
+-- 18
+SELECT COUNT(*) AS TotalExemplaresDisp FROM Exemplar WHERE status = 'Disponível';
+
+-- 19
+SELECT a.nome, COUNT(l.ISBN) AS LivrosGrandes
+FROM AreaDeConhecimento a
+JOIN Livro l ON a.codArea = l.AreaDeConhecimento_codArea
+WHERE l.nPaginas > 400
+GROUP BY a.nome;
+
+-- 20
+SELECT DISTINCT c.nome AS Cliente, l.titulo AS Livro
+FROM Cliente c
+JOIN Transacao t ON c.CPF = t.Cliente_CPF
+JOIN Exemplar e ON t.Exemplar_Livro_ISBN = e.Livro_ISBN
+JOIN Livro l ON e.Livro_ISBN = l.ISBN
+JOIN Autoria au ON l.ISBN = au.Livro_ISBN
+JOIN `Autor(a)` a ON au.`Autor(a)_idAutor(a)` = a.`idAutor(a)`
+JOIN Nacionalidade n ON a.Nacionalidade_idPais = n.idPais
+WHERE n.nacionalidade = 'Brasileira';
