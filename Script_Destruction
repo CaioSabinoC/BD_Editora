@@ -1,0 +1,9 @@
+-- -----------------------------------------------------
+-- Destrói o schema Editora por completo
+-- -----------------------------------------------------
+USE `Editora`;
+SET FOREIGN_KEY_CHECKS=0;
+
+DROP DATABASE IF EXISTS `Editora`;
+
+SET FOREIGN_KEY_CHECKS=1;
