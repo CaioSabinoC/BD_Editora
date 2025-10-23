@@ -1,0 +1,31 @@
+ALTER TABLE Editora.Colaborador
+ADD COLUMN telefone VARCHAR(20) AFTER email;
+
+ALTER TABLE Editora.Colaborador
+MODIFY COLUMN salario DECIMAL(10,2) NOT NULL;
+
+ALTER TABLE Editora.Livro
+CHANGE COLUMN descricao resumo VARCHAR(150);
+
+ALTER TABLE Editora.Cliente
+ADD COLUMN telefone VARCHAR(20) AFTER email;
+
+ALTER TABLE Editora.Colaborador
+ADD COLUMN Cargo_CBO INT,
+ADD CONSTRAINT fk_Colaborador_Cargo
+FOREIGN KEY (Cargo_CBO) REFERENCES Editora.Cargo(CBO);
+
+ALTER TABLE Editora.Colaborador
+DROP COLUMN nomeSocial;
+
+ALTER TABLE Editora.Livro
+MODIFY COLUMN titulo VARCHAR(150) NOT NULL;
+
+ALTER TABLE Editora.Cliente
+ADD INDEX idx_cliente_nome (nome);
+
+ALTER TABLE Editora.Cliente
+ADD COLUMN dataCadastro DATE NOT NULL DEFAULT CURRENT_DATE;
+
+ALTER TABLE Editora.Exemplar
+MODIFY COLUMN status VARCHAR(45) NULL;
