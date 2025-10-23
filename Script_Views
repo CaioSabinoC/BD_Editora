@@ -1,0 +1,72 @@
+USE Editora;
+
+-- 1
+CREATE VIEW vw_colaboradores_salario AS
+SELECT nome, salario FROM Colaborador WHERE salario > 4000;
+
+-- 2
+CREATE VIEW vw_livros_por_area AS
+SELECT a.nome AS Area, COUNT(l.ISBN) AS Quantidade
+FROM AreaDeConhecimento a
+LEFT JOIN Livro l ON a.codArea = l.AreaDeConhecimento_codArea
+GROUP BY a.nome;
+
+-- 3
+CREATE VIEW vw_autores_brasileiros AS
+SELECT a.`Autor(a)col`, n.nacionalidade
+FROM `Autor(a)` a
+JOIN Nacionalidade n ON a.Nacionalidade_idPais = n.idPais
+WHERE n.nacionalidade = 'Brasileira';
+
+-- 4
+CREATE VIEW vw_exemplares_por_livro AS
+SELECT l.titulo, COUNT(e.nSerie) AS Exemplares
+FROM Livro l
+LEFT JOIN Exemplar e ON l.ISBN = e.Livro_ISBN
+GROUP BY l.titulo;
+
+-- 5
+CREATE VIEW vw_transacoes_por_cliente AS
+SELECT c.nome, COUNT(t.idTransacao) AS TotalTransacoes
+FROM Cliente c
+JOIN Transacao t ON c.CPF = t.Cliente_CPF
+GROUP BY c.nome;
+
+-- 6
+CREATE VIEW vw_vendas_por_colaborador AS
+SELECT col.nome, COUNT(t.idTransacao) AS TotalVendas
+FROM Colaborador col
+JOIN Transacao t ON col.CPF = t.Colaborador_CPF
+GROUP BY col.nome;
+
+-- 7
+CREATE VIEW vw_media_salarial_por_cargo AS
+SELECT cg.nome, AVG(cb.salario) AS MediaSalarial
+FROM Cargo cg
+JOIN ContratoTrab ct ON cg.CBO = ct.Cargo_CBO
+JOIN Colaborador cb ON ct.Colaborador_CPF = cb.CPF
+GROUP BY cg.nome;
+
+-- 8
+CREATE VIEW vw_departamentos_colaboradores AS
+SELECT d.nome AS Departamento, COUNT(ct.Colaborador_CPF) AS TotalColaboradores
+FROM Departamento d
+JOIN ContratoTrab ct ON d.idDepartamento = ct.Departamento_idDepartamento
+GROUP BY d.nome;
+
+-- 9
+CREATE VIEW vw_livros_multiautores AS
+SELECT l.titulo, COUNT(a.`Autor(a)_idAutor(a)`) AS QtdeAutores
+FROM Autoria a
+JOIN Livro l ON a.Livro_ISBN = l.ISBN
+GROUP BY l.titulo
+HAVING QtdeAutores > 1;
+
+-- 10
+CREATE VIEW vw_livros_brasileiros AS
+SELECT DISTINCT l.titulo, n.nacionalidade
+FROM Livro l
+JOIN Autoria au ON l.ISBN = au.Livro_ISBN
+JOIN `Autor(a)` a ON au.`Autor(a)_idAutor(a)` = a.`idAutor(a)`
+JOIN Nacionalidade n ON a.Nacionalidade_idPais = n.idPais
+WHERE n.nacionalidade = 'Brasileira';
