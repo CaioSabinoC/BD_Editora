@@ -1,0 +1,103 @@
+SET SQL_SAFE_UPDATES = 0;
+
+USE Editora;
+-- 1. Aumentar salário dos colaboradores com mais de 4000
+UPDATE Colaborador 
+SET salario = salario * 1.05 
+	WHERE salario > 4000;
+
+-- 2. Corrigir email de colaborador
+UPDATE Colaborador 
+SET email = 'joao.silva@editora.com' 
+	WHERE nome = 'João Silva';
+
+-- 3. Atualizar nome social
+UPDATE Colaborador 
+SET nomeSocial = 'Ana P.' 
+	WHERE nome = 'Ana Paula';
+
+-- 4. Diminuir salário dos colaboradores do gênero masculino
+UPDATE Colaborador 
+SET salario = salario - 300 
+	WHERE genero = 'Masculino';
+
+-- 5. Atualizar descrição de uma área
+UPDATE AreaDeConhecimento 
+SET descricao = 'Área de livros técnicos' 
+	WHERE nome = 'Tecnologia';
+
+-- 6. Atualizar o gênero de um livro
+UPDATE Livro 
+SET genero = 'Ficção Científica' 
+	WHERE titulo 
+    LIKE '%Futuro%';
+
+-- 7. Mudar forma de pagamento de uma transação
+UPDATE Transacao 
+SET formaPag = 'Pix' 
+	WHERE formaPag = 'Dinheiro';
+
+-- 8. Corrigir nacionalidade errada
+UPDATE Nacionalidade 
+SET nacionalidade = 'Brasileira' 
+	WHERE Pais = 'Brasil';
+
+-- 9. Atualizar status de exemplares emprestados
+UPDATE Exemplar 
+SET status = 'Disponível'
+	WHERE status = 'Emprestado';
+
+-- 10. Atualizar departamento
+UPDATE Departamento 
+SET nome = 'Departamento Editorial' 
+	WHERE idDepartamento = 1;
+
+-- 11. Deletar colaboradores com salário abaixo de 3000
+DELETE FROM Colaborador 
+	WHERE salario < 3000;
+
+-- 12. Deletar clientes com status "Inativo"
+DELETE FROM Cliente 
+	WHERE status = 'Inativo';
+
+-- 13. Deletar livros sem exemplares
+DELETE FROM Livro 
+	WHERE ISBN NOT IN (SELECT DISTINCT Livro_ISBN FROM Exemplar);
+
+-- 14. Atualizar faixa salarial
+UPDATE Cargo 
+SET faixaSalarial = '3500-6000' 
+	WHERE nome = 'Revisor';
+
+-- 15. Atualizar data de fim de contrato
+UPDATE ContratoTrab 
+SET dataFim = '2025-12-31' 
+	WHERE Colaborador_CPF = 100000016;
+
+-- 16. Atualizar descrição de palavras-chave
+UPDATE PalavrasChave 
+SET palavra = UPPER(palavra);
+
+-- 17. Corrigir erro de digitação em área
+UPDATE AreaDeConhecimento 
+SET nome = 'Administração e Negócios' 
+	WHERE nome = 'Administração';
+
+-- 18. Deletar palavras-chave duplicadas
+DELETE FROM PalavrasChave 
+	WHERE codPalavra NOT IN (SELECT codMin FROM (SELECT MIN(codPalavra) AS codMin FROM PalavrasChave
+        GROUP BY palavra) 
+			AS temp);
+
+-- 19. Aumentar salário de colaboradores do departamento 2
+UPDATE Colaborador SET salario = salario + 500 WHERE CPF IN (
+  SELECT Colaborador_CPF 
+  FROM ContratoTrab 
+	WHERE Departamento_idDepartamento = 2);
+
+-- 20. Atualizar título de livro
+UPDATE Livro SET titulo = CONCAT(titulo, ' (Edição Revisada)')
+	WHERE ISBN IN (SELECT ISBN FROM (SELECT ISBN FROM Livro LIMIT 5) 
+		AS temp);
+        
+SET SQL_SAFE_UPDATES = 1;
