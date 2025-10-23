@@ -1,0 +1,288 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema Editora
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema Editora
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `Editora` DEFAULT CHARACTER SET utf8 ;
+USE `Editora` ;
+
+-- -----------------------------------------------------
+-- Table `Editora`.`Colaborador`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Editora`.`Colaborador` (
+  `CPF` INT NOT NULL,
+  `nome` VARCHAR(60) NOT NULL,
+  `dataNasc` DATE NOT NULL,
+  `genero` VARCHAR(25) NOT NULL,
+  `estadoCivil` VARCHAR(25) NOT NULL,
+  `email` VARCHAR(60) NOT NULL,
+  `carteiraTrab` VARCHAR(45) NOT NULL,
+  `salario` DECIMAL NOT NULL,
+  `nomeSocial` VARCHAR(45) NULL,
+  PRIMARY KEY (`CPF`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Editora`.`AreaDeConhecimento`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Editora`.`AreaDeConhecimento` (
+  `codArea` INT NOT NULL,
+  `nome` VARCHAR(45) NOT NULL,
+  `descricao` VARCHAR(100) NULL,
+  PRIMARY KEY (`codArea`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Editora`.`Livro`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Editora`.`Livro` (
+  `ISBN` BIGINT NOT NULL,
+  `titulo` VARCHAR(100) NOT NULL,
+  `genero` VARCHAR(45) NOT NULL,
+  `editora` VARCHAR(45) NOT NULL,
+  `dataPublicacao` DATE NOT NULL,
+  `nPaginas` INT NOT NULL,
+  `descricao` VARCHAR(150) NULL,
+  `AreaDeConhecimento_codArea` INT NOT NULL,
+  PRIMARY KEY (`ISBN`),
+  INDEX `fk_Livro_AreaDeConhecimento1_idx` (`AreaDeConhecimento_codArea` ASC) VISIBLE,
+  CONSTRAINT `fk_Livro_AreaDeConhecimento1`
+    FOREIGN KEY (`AreaDeConhecimento_codArea`)
+    REFERENCES `Editora`.`AreaDeConhecimento` (`codArea`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Editora`.`Nacionalidade`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Editora`.`Nacionalidade` (
+  `Pais` VARCHAR(60) NOT NULL,
+  `nacionalidade` VARCHAR(60) NOT NULL,
+  `idPais` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idPais`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Editora`.`Autor(a)`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Editora`.`Autor(a)` (
+  `idAutor(a)` INT NOT NULL AUTO_INCREMENT,
+  `dataNasc` DATE NOT NULL,
+  `Autor(a)col` VARCHAR(45) NULL,
+  `Nacionalidade_idPais` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idAutor(a)`),
+  INDEX `fk_Autor(a)_Nacionalidade1_idx` (`Nacionalidade_idPais` ASC) VISIBLE,
+  CONSTRAINT `fk_Autor(a)_Nacionalidade1`
+    FOREIGN KEY (`Nacionalidade_idPais`)
+    REFERENCES `Editora`.`Nacionalidade` (`idPais`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Editora`.`Autoria`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Editora`.`Autoria` (
+  `Livro_ISBN` BIGINT NOT NULL,
+  `Autor(a)_idAutor(a)` INT NOT NULL,
+  PRIMARY KEY (`Livro_ISBN`, `Autor(a)_idAutor(a)`),
+  INDEX `fk_Livro_has_Autor(a)_Autor(a)1_idx` (`Autor(a)_idAutor(a)` ASC) VISIBLE,
+  INDEX `fk_Livro_has_Autor(a)_Livro_idx` (`Livro_ISBN` ASC) VISIBLE,
+  CONSTRAINT `fk_Livro_has_Autor(a)_Livro`
+    FOREIGN KEY (`Livro_ISBN`)
+    REFERENCES `Editora`.`Livro` (`ISBN`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Livro_has_Autor(a)_Autor(a)1`
+    FOREIGN KEY (`Autor(a)_idAutor(a)`)
+    REFERENCES `Editora`.`Autor(a)` (`idAutor(a)`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Editora`.`Exemplar`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Editora`.`Exemplar` (
+  `nSerie` INT NOT NULL,
+  `localizacao` VARCHAR(100) NOT NULL,
+  `status` VARCHAR(45) NOT NULL,
+  `Livro_ISBN` BIGINT NOT NULL,
+  PRIMARY KEY (`nSerie`, `Livro_ISBN`),
+  INDEX `fk_Exemplar_Livro1_idx` (`Livro_ISBN` ASC) VISIBLE,
+  CONSTRAINT `fk_Exemplar_Livro1`
+    FOREIGN KEY (`Livro_ISBN`)
+    REFERENCES `Editora`.`Livro` (`ISBN`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Editora`.`PalavrasChave`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Editora`.`PalavrasChave` (
+  `codPalavra` INT NOT NULL,
+  `palavra` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`codPalavra`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Editora`.`Refencia`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Editora`.`Refencia` (
+  `Livro_ISBN` BIGINT NOT NULL,
+  `PalavrasChave_codPalavra` INT NOT NULL,
+  PRIMARY KEY (`Livro_ISBN`, `PalavrasChave_codPalavra`),
+  INDEX `fk_Livro_has_PalavrasChave_PalavrasChave1_idx` (`PalavrasChave_codPalavra` ASC) VISIBLE,
+  INDEX `fk_Livro_has_PalavrasChave_Livro1_idx` (`Livro_ISBN` ASC) VISIBLE,
+  CONSTRAINT `fk_Livro_has_PalavrasChave_Livro1`
+    FOREIGN KEY (`Livro_ISBN`)
+    REFERENCES `Editora`.`Livro` (`ISBN`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Livro_has_PalavrasChave_PalavrasChave1`
+    FOREIGN KEY (`PalavrasChave_codPalavra`)
+    REFERENCES `Editora`.`PalavrasChave` (`codPalavra`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Editora`.`Cliente`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Editora`.`Cliente` (
+  `CPF` INT NOT NULL,
+  `nome` VARCHAR(60) NOT NULL,
+  `status` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(60) NOT NULL,
+  PRIMARY KEY (`CPF`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Editora`.`Transacao`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Editora`.`Transacao` (
+  `idTransacao` INT NOT NULL,
+  `formaPag` VARCHAR(45) NOT NULL,
+  `dataTransacao` DATE NOT NULL,
+  `Exemplar_nSerie` INT NOT NULL,
+  `Exemplar_Livro_ISBN` BIGINT NOT NULL,
+  `Colaborador_CPF` INT NOT NULL,
+  `Cliente_CPF` INT NOT NULL,
+  PRIMARY KEY (`idTransacao`, `Exemplar_nSerie`, `Exemplar_Livro_ISBN`, `Colaborador_CPF`, `Cliente_CPF`),
+  INDEX `fk_Transacao_Exemplar1_idx` (`Exemplar_nSerie` ASC, `Exemplar_Livro_ISBN` ASC) VISIBLE,
+  INDEX `fk_Transacao_Colaborador1_idx` (`Colaborador_CPF` ASC) VISIBLE,
+  INDEX `fk_Transacao_Cliente1_idx` (`Cliente_CPF` ASC) VISIBLE,
+  CONSTRAINT `fk_Transacao_Exemplar1`
+    FOREIGN KEY (`Exemplar_nSerie` , `Exemplar_Livro_ISBN`)
+    REFERENCES `Editora`.`Exemplar` (`nSerie` , `Livro_ISBN`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Transacao_Colaborador1`
+    FOREIGN KEY (`Colaborador_CPF`)
+    REFERENCES `Editora`.`Colaborador` (`CPF`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Transacao_Cliente1`
+    FOREIGN KEY (`Cliente_CPF`)
+    REFERENCES `Editora`.`Cliente` (`CPF`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Editora`.`Cargo`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Editora`.`Cargo` (
+  `CBO` INT NOT NULL,
+  `nome` VARCHAR(45) NOT NULL,
+  `faixaSalarial` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`CBO`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Editora`.`Departamento`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Editora`.`Departamento` (
+  `idDepartamento` INT NOT NULL,
+  `nome` VARCHAR(45) NOT NULL,
+  `descricao` VARCHAR(60) NULL,
+  PRIMARY KEY (`idDepartamento`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Editora`.`ContratoTrab`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Editora`.`ContratoTrab` (
+  `dataInicio` INT NOT NULL,
+  `dataFim` VARCHAR(45) NULL,
+  `Colaborador_CPF` INT NOT NULL,
+  `Departamento_idDepartamento` INT NOT NULL,
+  `Cargo_CBO` INT NOT NULL,
+  PRIMARY KEY (`Colaborador_CPF`, `Departamento_idDepartamento`, `Cargo_CBO`),
+  INDEX `fk_ContratoTrab_Departamento1_idx` (`Departamento_idDepartamento` ASC) VISIBLE,
+  INDEX `fk_ContratoTrab_Cargo1_idx` (`Cargo_CBO` ASC) VISIBLE,
+  CONSTRAINT `fk_ContratoTrab_Colaborador1`
+    FOREIGN KEY (`Colaborador_CPF`)
+    REFERENCES `Editora`.`Colaborador` (`CPF`)
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_ContratoTrab_Departamento1`
+    FOREIGN KEY (`Departamento_idDepartamento`)
+    REFERENCES `Editora`.`Departamento` (`idDepartamento`)
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_ContratoTrab_Cargo1`
+    FOREIGN KEY (`Cargo_CBO`)
+    REFERENCES `Editora`.`Cargo` (`CBO`)
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Editora`.`Gerente`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Editora`.`Gerente` (
+  `Departamento_idDepartamento` INT NOT NULL,
+  `Colaborador_CPF` INT NOT NULL,
+  INDEX `fk_Gerente_Departamento1_idx` (`Departamento_idDepartamento` ASC) VISIBLE,
+  INDEX `fk_Gerente_Colaborador1_idx` (`Colaborador_CPF` ASC) VISIBLE,
+  CONSTRAINT `fk_Gerente_Departamento1`
+    FOREIGN KEY (`Departamento_idDepartamento`)
+    REFERENCES `Editora`.`Departamento` (`idDepartamento`)
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Gerente_Colaborador1`
+    FOREIGN KEY (`Colaborador_CPF`)
+    REFERENCES `Editora`.`Colaborador` (`CPF`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
