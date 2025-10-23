@@ -1,0 +1,413 @@
+-- -----------------------------------------------------
+-- AreaDeConhecimento 
+-- -----------------------------------------------------
+
+INSERT INTO AreaDeConhecimento VALUES
+(1,'Tecnologia','Livros sobre tecnologia da informação'),
+(2,'Literatura','Obras literárias de ficção e poesia'),
+(3,'Ciências Humanas','Sociologia, Filosofia, História'),
+(4,'Educação','Metodologias de ensino'),
+(5,'Administração','Gestão e negócios'),
+(6,'Saúde','Medicina e Enfermagem'),
+(7,'Engenharia','Construção e cálculo estrutural'),
+(8,'Direito','Leis e jurisprudência'),
+(9,'Arte','Pintura, música e escultura'),
+(10,'Psicologia','Comportamento e mente humana'),
+(11,'Matemática','Lógica e cálculo'),
+(12,'Física','Mecânica e energia'),
+(13,'Química','Estudo das substâncias'),
+(14,'Biologia','Estudo da vida'),
+(15,'Política','Ciência política e governo'),
+(16,'Esportes','Educação física'),
+(17,'Design','Design gráfico e de produto'),
+(18,'Culinária','Gastronomia'),
+(19,'Viagens','Turismo'),
+(20,'Economia','Mercado e finanças');
+
+-- -----------------------------------------------------
+-- Nacionalidade
+-- -----------------------------------------------------
+
+INSERT INTO `Nacionalidade` (`Pais`, `nacionalidade`, `idPais`) VALUES
+('Brasil','Brasileira','BR'),
+('Portugal','Portuguesa','PT'),
+('EUA','Americana','US'),
+('Japão','Japonesa','JP'),
+('México','Mexicana','MX'),
+('Itália','Italiana','IT'),
+('França','Francesa','FR'),
+('Canadá','Canadense','CA'),
+('Alemanha','Alemã','DE'),
+('Espanha','Espanhola','ES'),
+('Argentina','Argentina','AR'),
+('Chile','Chilena','CL'),
+('China','Chinesa','CN'),
+('Índia','Indiana','IN'),
+('Inglaterra','Britânica','UK'),
+('Suécia','Sueca','SE'),
+('Rússia','Russa','RU'),
+('Noruega','Norueguesa','NO'),
+('Egito','Egípcia','EG'),
+('Coreia do Sul','Sul-coreana','KR');
+
+-- -----------------------------------------------------
+--  Cargos
+-- -----------------------------------------------------
+
+INSERT INTO `Cargo` (`CBO`, `nome`, `faixaSalarial`) VALUES
+(1001,'Editor','3000-6000'),
+(1002,'Revisor','2000-4000'),
+(1003,'Designer','2500-5000'),
+(1004,'Vendas','1800-3500'),
+(1005,'Marketing','2200-4500'),
+(1006,'Logística','1800-3300'),
+(1007,'TI','2500-7000'),
+(1008,'Gerente','5000-12000');
+
+-- -----------------------------------------------------
+-- Departamentos 
+-- -----------------------------------------------------
+
+INSERT INTO `Departamento` (`idDepartamento`, `nome`, `descricao`) VALUES
+(10,'Editorial','Responsável pelo conteúdo'),
+(20,'Comercial','Vendas e relacionamento'),
+(30,'Produção','Impressão e logística'),
+(40,'Marketing','Divulgação'),
+(50,'RH','Recursos humanos'),
+(60,'Financeiro','Contas e faturamento'),
+(70,'TI','Tecnologia da informação'),
+(80,'Design','Capa e diagramação');
+
+-- -----------------------------------------------------
+-- Colaboradores 
+-- -----------------------------------------------------
+
+INSERT INTO `Colaborador` (`CPF`,`nome`,`dataNasc`,`genero`,`estadoCivil`,`email`,`carteiraTrab`,`salario`,`nomeSocial`) VALUES
+(100000001,'Ana Silva','1988-03-12','Feminino','Solteiro','ana.silva@email.com','CTPS1001',3500,NULL),
+(100000002,'Bruno Costa','1990-07-21','Masculino','Casado','bruno.costa@email.com','CTPS1002',4200,NULL),
+(100000003,'Carlos Pereira','1985-11-02','Masculino','Casado','c.pereira@email.com','CTPS1003',5000,NULL),
+(100000004,'Daniela Ramos','1992-01-15','Feminino','Solteiro','d.ramos@email.com','CTPS1004',3200,NULL),
+(100000005,'Eduardo Lima','1980-06-04','Masculino','Casado','eduardo.lima@email.com','CTPS1005',4800,NULL),
+(100000006,'Fernanda Sousa','1995-09-10','Feminino','Solteiro','fernanda.s@email.com','CTPS1006',2900,'Fern'),
+(100000007,'Gabriel Melo','1987-12-30','Masculino','Casado','gabriel.melo@email.com','CTPS1007',3600,NULL),
+(100000008,'Helena Rocha','1991-05-25','Feminino','Solteiro','helena.rocha@email.com','CTPS1008',3300,NULL),
+(100000009,'Igor Martins','1983-02-19','Masculino','Divorciado','igor.m@email.com','CTPS1009',4100,NULL),
+(100000010,'Juliana Alves','1994-08-08','Feminino','Solteiro','juliana.alves@email.com','CTPS1010',3050,NULL),
+(100000011,'Kleber Santos','1979-04-14','Masculino','Casado','kleber.s@email.com','CTPS1011',5200,NULL),
+(100000012,'Larissa Pinto','1996-10-02','Feminino','Solteiro','l.pinto@email.com','CTPS1012',2750,NULL),
+(100000013,'Marcos Vieira','1982-09-18','Masculino','Casado','marcos.v@email.com','CTPS1013',4300,NULL),
+(100000014,'Natália Fernandes','1993-11-11','Feminino','Solteiro','natalia.f@email.com','CTPS1014',3100,NULL),
+(100000015,'Otávio Barros','1986-07-07','Masculino','Casado','otavio.b@email.com','CTPS1015',4500,NULL),
+(100000016,'Patrícia Cardoso','1989-12-01','Feminino','Casado','patricia.c@email.com','CTPS1016',3400,NULL),
+(100000017,'Queiroz Lima','1997-03-03','Masculino','Solteiro','queiroz@email.com','CTPS1017',2800,NULL),
+(100000018,'Rafaela Gomes','1990-02-26','Feminino','Casado','rafa.gomes@email.com','CTPS1018',2950,NULL),
+(100000019,'Samuel Duarte','1984-06-13','Masculino','Casado','samuel.d@email.com','CTPS1019',3900,NULL),
+(100000020,'Talita Nunes','1998-01-20','Feminino','Solteiro','talita.n@email.com','CTPS1020',2600,NULL);
+
+-- -----------------------------------------------------
+-- Cliente 
+-- -----------------------------------------------------
+
+INSERT INTO `Cliente` (`CPF`,`nome`,`status`,`email`) VALUES
+(200000001,'Alice Moraes','Ativo','alice.moraes@mail.com'),
+(200000002,'Beatriz Silva','Ativo','beatriz.s@mail.com'),
+(200000003,'Caio Rocha','Ativo','caio.r@mail.com'),
+(200000004,'Diego Freitas','Inativo','diego.f@mail.com'),
+(200000005,'Ester Cardoso','Ativo','ester.c@mail.com'),
+(200000006,'Fabio Cunha','Ativo','fabio.c@mail.com'),
+(200000007,'Gisele Prado','Ativo','gisele.p@mail.com'),
+(200000008,'Hugo Lopes','Ativo','hugo.l@mail.com'),
+(200000009,'Iara Mendes','Ativo','iara.m@mail.com'),
+(200000010,'Jonas Ribeiro','Ativo','jonas.r@mail.com'),
+(200000011,'Karla Teixeira','Ativo','karla.t@mail.com'),
+(200000012,'Lucas Nascimento','Ativo','lucas.n@mail.com'),
+(200000013,'Mariana Silva','Ativo','mariana.s@mail.com'),
+(200000014,'Nuno Oliveira','Ativo','nuno.o@mail.com'),
+(200000015,'Olivia Pinto','Ativo','olivia.p@mail.com'),
+(200000016,'Pedro Alves','Ativo','pedro.a@mail.com'),
+(200000017,'Quésia Mora','Ativo','quesia.m@mail.com'),
+(200000018,'Rodolfo Sena','Ativo','rodolfo.s@mail.com'),
+(200000019,'Sofia Braga','Ativo','sofia.b@mail.com'),
+(200000020,'Thiago Ramos','Ativo','thiago.r@mail.com'),
+(200000021,'Ubirajara Costa','Ativo','u.costa@mail.com'),
+(200000022,'Vanessa Melo','Ativo','vanessa.m@mail.com'),
+(200000023,'Wilson Rocha','Ativo','wilson.r@mail.com'),
+(200000024,'Ximena Duarte','Ativo','ximena.d@mail.com'),
+(200000025,'Yuri Andrade','Ativo','yuri.a@mail.com');
+
+-- -----------------------------------------------------
+-- PalavrasChave 
+-- -----------------------------------------------------
+
+INSERT INTO `PalavrasChave` (`codPalavra`,`palavra`) VALUES
+(1,'ficção'),(2,'romance'),(3,'tecnologia'),(4,'python'),(5,'história'),
+(6,'biografia'),(7,'infantil'),(8,'economia'),(9,'saúde'),(10,'arte'),
+(11,'design'),(12,'programação'),(13,'aventura'),(14,'terror'),(15,'educação'),
+(16,'ciência'),(17,'poesia'),(18,'ensaio'),(19,'negócios'),(20,'fotografia');
+
+-- -----------------------------------------------------
+-- Livro 
+-- -----------------------------------------------------
+
+INSERT INTO `Livro` (`ISBN`,`titulo`,`genero`,`editora`,`dataPublicacao`,`nPaginas`,`descricao`,`AreaDeConhecimento_codArea`) VALUES
+(9780000001,'Aventuras do Teste','Aventura','Editora X','2010-05-10',240,'Livro de aventura','1'),
+(9780000002,'Introdução a Python','Tecnico','Editora X','2018-03-20',320,'Livro de programação','3'),
+(9780000003,'Histórias do Brasil','História','Editora Y','2015-09-01',410,'História brasileira','5'),
+(9780000004,'Manual de Design','Arte','Editora Z','2019-11-11',200,'Design gráfico','8'),
+(9780000005,'Guia de Saúde','Saúde','Editora Y','2020-02-02',180,'Bem-estar e saúde','8'),
+(9780000006,'Pequenos Contos','Ficção','Editora X','2012-04-14',150,'Contos curtos','1'),
+(9780000007,'Economia para Todos','Economia','Editora Z','2016-07-07',330,'Noções de economia','8'),
+(9780000008,'Poesias Soltas','Poesia','Editora X','2011-12-01',120,'Coletânea de poemas','1'),
+(9780000009,'Biografia de Fulano','Biografia','Editora Y','2013-06-06',280,'Vida e obra','6'),
+(9780000010,'Tecnologia Moderna','Tecnologia','Editora T','2021-01-15',410,'Tendências tecnológicas','3'),
+(9780000011,'Aprendendo SQL','Tecnico','Editora T','2017-08-08',260,'Banco de dados','3'),
+(9780000012,'Cozinha Fácil','Não-ficção','Editora C','2014-10-10',220,'Receitas práticas','1'),
+(9780000013,'Fotografia Básica','Arte','Editora C','2018-05-05',140,'Técnicas de foto','8'),
+(9780000014,'Terror Urbano','Terror','Editora X','2019-09-09',210,'Histórias de terror','1'),
+(9780000015,'Educação Moderna','Educação','Editora Y','2016-02-02',300,'Pedagogia','5'),
+(9780000016,'Ciência Hoje','Ciência','Editora Z','2015-03-03',190,'Divulgação científica','2'),
+(9780000017,'Negócios 101','Negócios','Editora T','2020-07-07',340,'Empreendedorismo','8'),
+(9780000018,'Aprendizagem Infantil','Infantil','Editora K','2013-08-08',90,'Livros infantis','7'),
+(9780000019,'Contos Modernos','Ficção','Editora L','2012-06-06',220,'Contos contemporâneos','1'),
+(9780000020,'Guia do Programador','Tecnico','Editora T','2022-04-04',460,'Boas práticas','3'),
+(9780000021,'História da Arte','Arte','Editora A','2010-01-01',500,'História das artes','4'),
+(9780000022,'Ensaios Críticos','Ensaios','Editora B','2011-02-02',260,'Ensaios literários','1'),
+(9780000023,'Viagem ao Mundo','Viagem','Editora C','2018-03-03',320,'Relatos de viagem','1'),
+(9780000024,'Fotobiografia','Biografia','Editora D','2014-04-04',210,'Biografia com fotos','6'),
+(9780000025,'Programação Avançada','Tecnico','Editora T','2019-05-05',520,'Algoritmos e estruturas','3'),
+(9780000026,'Micropoemas','Poesia','Editora E','2016-06-06',80,'Poemas curtos','1'),
+(9780000027,'Técnicas de Impressão','Produção','Editora F','2013-07-07',200,'Processo de impressão','8'),
+(9780000028,'Saúde Mental','Saúde','Editora G','2021-08-08',230,'Psicologia e saúde','9'),
+(9780000029,'Contos de Fantasia','Ficção','Editora H','2010-09-09',310,'Fantasia épica','1'),
+(9780000030,'Guia do Leitor','Geral','Editora I','2012-10-10',150,'Orientações para leitores','1');
+
+-- -----------------------------------------------------
+-- Autor(a) 
+-- -----------------------------------------------------
+
+INSERT INTO `Autor(a)` (`dataNasc`,`Autor(a)col`,`Nacionalidade_idPais`) VALUES
+('1970-01-01','Vinícius Moreira','BR'),
+('1980-02-02','Marina Freitas','PT'),
+('1990-03-03','Leandro Barros','US'),
+('1975-04-04','Vanessa Dias','UK'),
+('1982-05-05','Eduardo Santana','FR'),
+('1968-06-06','Renata Cardoso','DE'),
+('1995-07-07','Thiago Monteiro','JP'),
+('1988-08-08','Patrícia Azevedo','CA'),
+('1979-09-09','André Ribeiro','BR'),
+('1985-10-10','Daniela Gomes','PT'),
+('1992-11-11','Bruno Castro','US'),
+('1976-12-12','Carolina Teixeira','UK'),
+('1983-01-13','Pedro Carvalho','FR'),
+('1969-02-14','Juliana Nascimento','DE'),
+('1991-03-15','Gustavo Martins','JP'),
+('1987-04-16','Beatriz Ramos','CA'),
+('1978-05-17','Lucas Alves','BR'),
+('1984-06-18','Camila Rocha','PT'),
+('1993-07-19','Rafael Lima','US'),
+('1974-08-20','Laura Fernandes','UK'),
+('1981-09-21','Felipe Costa','FR'),
+('1996-10-22','Ana Oliveira','DE'),
+('1967-11-23','Carlos Pereira','JP'),
+('1994-12-24','Maria Souza','CA'),
+('1972-01-25','João Silva','BR');
+
+-- -----------------------------------------------------
+-- Exemplar 
+-- -----------------------------------------------------
+
+INSERT INTO `Exemplar` (`nSerie`,`localizacao`,`status`,`Livro_ISBN`) VALUES
+(1,'Prateleira A1','Disponível',9780000001),
+(2,'Prateleira A1','Emprestado',9780000001),
+(3,'Prateleira A2','Disponível',9780000002),
+(4,'Prateleira A2','Disponível',9780000002),
+(5,'Prateleira B1','Disponível',9780000003),
+(6,'Prateleira B1','Disponível',9780000003),
+(7,'Prateleira B2','Reservado',9780000004),
+(8,'Prateleira B2','Disponível',9780000004),
+(9,'Prateleira C1','Disponível',9780000005),
+(10,'Prateleira C1','Disponível',9780000005),
+(11,'Prateleira C2','Disponível',9780000006),
+(12,'Prateleira C2','Emprestado',9780000006),
+(13,'Prateleira D1','Disponível',9780000007),
+(14,'Prateleira D1','Disponível',9780000007),
+(15,'Prateleira D2','Disponível',9780000008),
+(16,'Prateleira D2','Disponível',9780000008),
+(17,'Prateleira E1','Disponível',9780000009),
+(18,'Prateleira E1','Disponível',9780000009),
+(19,'Prateleira E2','Disponível',9780000010),
+(20,'Prateleira E2','Disponível',9780000010),
+(21,'Prateleira F1','Disponível',9780000011),
+(22,'Prateleira F1','Disponível',9780000011),
+(23,'Prateleira F2','Disponível',9780000012),
+(24,'Prateleira F2','Disponível',9780000012),
+(25,'Prateleira G1','Disponível',9780000013),
+(26,'Prateleira G1','Disponível',9780000013),
+(27,'Prateleira G2','Emprestado',9780000014),
+(28,'Prateleira G2','Disponível',9780000014),
+(29,'Prateleira H1','Disponível',9780000015),
+(30,'Prateleira H1','Disponível',9780000015),
+(31,'Prateleira H2','Disponível',9780000016),
+(32,'Prateleira H2','Disponível',9780000016),
+(33,'Prateleira I1','Disponível',9780000017),
+(34,'Prateleira I1','Disponível',9780000017),
+(35,'Prateleira I2','Disponível',9780000018),
+(36,'Prateleira I2','Disponível',9780000018),
+(37,'Prateleira J1','Disponível',9780000019),
+(38,'Prateleira J1','Disponível',9780000019),
+(39,'Prateleira J2','Disponível',9780000020),
+(40,'Prateleira J2','Disponível',9780000020),
+(41,'Prateleira K1','Disponível',9780000021),
+(42,'Prateleira K1','Disponível',9780000021),
+(43,'Prateleira K2','Disponível',9780000022),
+(44,'Prateleira K2','Disponível',9780000022),
+(45,'Prateleira L1','Disponível',9780000023),
+(46,'Prateleira L1','Disponível',9780000023),
+(47,'Prateleira L2','Disponível',9780000024),
+(48,'Prateleira L2','Disponível',9780000024),
+(49,'Prateleira M1','Disponível',9780000025),
+(50,'Prateleira M1','Disponível',9780000025),
+(51,'Prateleira M2','Disponível',9780000026),
+(52,'Prateleira M2','Disponível',9780000026),
+(53,'Prateleira N1','Disponível',9780000027),
+(54,'Prateleira N1','Disponível',9780000027),
+(55,'Prateleira N2','Disponível',9780000028),
+(56,'Prateleira N2','Disponível',9780000028),
+(57,'Prateleira O1','Disponível',9780000029),
+(58,'Prateleira O1','Disponível',9780000029),
+(59,'Prateleira O2','Disponível',9780000030),
+(60,'Prateleira O2','Disponível',9780000030),
+(61,'Reserva P1','Disponível',9780000001),
+(62,'Reserva P2','Disponível',9780000002),
+(63,'Reserva P3','Disponível',9780000003),
+(64,'Reserva P4','Disponível',9780000004),
+(65,'Reserva P5','Disponível',9780000005),
+(66,'Reserva P6','Disponível',9780000006),
+(67,'Reserva P7','Disponível',9780000007),
+(68,'Reserva P8','Emprestado',9780000008),
+(69,'Reserva P9','Disponível',9780000009),
+(70,'Reserva P10','Disponível',9780000010),
+(71,'Reserva P11','Disponível',9780000011),
+(72,'Reserva P12','Disponível',9780000012),
+(73,'Reserva P13','Disponível',9780000013),
+(74,'Reserva P14','Disponível',9780000014),
+(75,'Reserva P15','Disponível',9780000015),
+(76,'Reserva P16','Disponível',9780000016),
+(77,'Reserva P17','Disponível',9780000017),
+(78,'Reserva P18','Disponível',9780000018),
+(79,'Reserva P19','Disponível',9780000019),
+(80,'Reserva P20','Disponível',9780000020);
+
+-- -----------------------------------------------------
+-- Autoria 
+-- -----------------------------------------------------
+
+INSERT INTO `Autoria` (`Livro_ISBN`,`Autor(a)_idAutor(a)`) VALUES
+(9780000001,1),(9780000001,2),
+(9780000002,3),(9780000002,4),
+(9780000003,5),(9780000003,6),
+(9780000004,7),(9780000005,8),
+(9780000006,9),(9780000007,10),
+(9780000008,11),(9780000009,12),
+(9780000010,13),(9780000011,14),
+(9780000012,15),(9780000013,16),
+(9780000014,17),(9780000015,18),
+(9780000016,19),(9780000017,20),
+(9780000018,21),(9780000019,22),
+(9780000020,23),(9780000021,24),
+(9780000022,25),(9780000023,1),
+(9780000024,2),(9780000025,3),
+(9780000026,4),(9780000027,5),
+(9780000028,6),(9780000029,7),
+(9780000030,8);
+
+-- -----------------------------------------------------
+-- Refencia 
+-- -----------------------------------------------------
+
+INSERT INTO `Refencia` (`Livro_ISBN`,`PalavrasChave_codPalavra`) VALUES
+(9780000001,13),(9780000001,1),
+(9780000002,4),(9780000002,12),
+(9780000003,5),(9780000003,16),
+(9780000004,11),(9780000004,10),
+(9780000005,9),(9780000005,16),
+(9780000006,1),(9780000006,13),
+(9780000007,19),(9780000007,8),
+(9780000008,17),(9780000008,1),
+(9780000009,6),(9780000009,4),
+(9780000010,3),(9780000010,12),
+(9780000011,12),(9780000011,3),
+(9780000012,10),(9780000012,1),
+(9780000013,20),(9780000013,11),
+(9780000014,14),(9780000014,1),
+(9780000015,15),(9780000015,16),
+(9780000016,16),(9780000016,2),
+(9780000017,19),(9780000017,1),
+(9780000018,7),(9780000018,1),
+(9780000019,13),(9780000020,12),
+(9780000021,10),(9780000022,18),
+(9780000023,13),(9780000024,6),
+(9780000025,12),(9780000025,3),
+(9780000026,17),(9780000027,8),
+(9780000028,9),(9780000029,13),
+(9780000030,1);
+
+-- -----------------------------------------------------
+-- ContratoTrab 
+-- -----------------------------------------------------
+
+INSERT INTO `ContratoTrab` (`dataInicio`,`dataFim`,`Colaborador_CPF`,`Departamento_idDepartamento`,`Cargo_CBO`) VALUES
+(20190101,'20231231',100000001,10,1001),
+(20200115,NULL,100000002,10,1002),
+(20180601,NULL,100000003,80,1003),
+(20210310,NULL,100000004,20,1004),
+(20170520,NULL,100000005,30,1005),
+(20191201,NULL,100000006,70,1006),
+(20220101,NULL,100000007,70,1007),
+(20180404,NULL,100000008,20,1004),
+(20200202,NULL,100000009,40,1005),
+(20160303,NULL,100000010,50,1006),
+(20170101,NULL,100000011,60,1008),
+(20190505,NULL,100000012,10,1002),
+(20180808,NULL,100000013,30,1003),
+(20161111,NULL,100000014,80,1001),
+(20210404,NULL,100000015,40,1007),
+(20190202,NULL,100000016,20,1005),
+(20171212,NULL,100000017,60,1004),
+(20150606,NULL,100000018,50,1006),
+(20180303,NULL,100000019,70,1002),
+(20200101,NULL,100000020,10,1001);
+-- -----------------------------------------------------
+--  Gerente
+-- -----------------------------------------------------
+INSERT INTO `Gerente` (`Departamento_idDepartamento`,`Colaborador_CPF`) VALUES
+(10,100000011),(20,100000015),(30,100000003),(40,100000007),
+(50,100000010),(60,100000001),(70,100000006),(80,100000014);
+
+-- -----------------------------------------------------
+--  Trasação
+-- -----------------------------------------------------
+
+INSERT INTO Transacao
+(idTransacao, formaPag, dataTransacao, Exemplar_nSerie, Exemplar_Livro_ISBN, Colaborador_CPF, Cliente_CPF)
+VALUES
+(1, 'PIX', '2025-10-03', 12, 9780000006, 100000005, 200000012),
+(2, 'Cartão', '2025-10-01', 3, 9780000002, 100000002, 200000008),
+(3, 'Dinheiro', '2025-10-07', 18, 9780000009, 100000018, 200000003),
+(4, 'PIX', '2025-10-05', 7, 9780000004, 100000011, 200000019),
+(5, 'Boleto', '2025-10-10', 1, 9780000001, 100000004, 200000001),
+(6, 'Cartão', '2025-10-02', 14, 9780000007, 100000006, 200000006),
+(7, 'PIX', '2025-10-08', 9, 9780000005, 100000017, 200000011),
+(8, 'Dinheiro', '2025-10-06', 20, 9780000010, 100000003, 200000020),
+(9, 'Cartão', '2025-10-04', 16, 9780000008, 100000020, 200000015),
+(10, 'Boleto', '2025-10-09', 5, 9780000003, 100000001, 200000005),
+(11, 'PIX', '2025-10-11', 2, 9780000001, 100000009, 200000004),
+(12, 'Cartão', '2025-10-12', 8, 9780000004, 100000014, 200000002),
+(13, 'Dinheiro', '2025-10-13', 13, 9780000007, 100000007, 200000010),
+(14, 'PIX', '2025-10-15', 4, 9780000002, 100000008, 200000013),
+(15, 'Boleto', '2025-10-14', 11, 9780000006, 100000012, 200000018),
+(16, 'Cartão', '2025-10-16', 19, 9780000010, 100000016, 200000009),
+(17, 'PIX', '2025-10-17', 6, 9780000003, 100000010, 200000007),
+(18, 'Dinheiro', '2025-10-18', 17, 9780000009, 100000013, 200000014),
+(19, 'Cartão', '2025-10-19', 15, 9780000008, 100000015, 200000016),
+(20, 'Boleto', '2025-10-20', 10, 9780000005, 100000019, 200000017);
